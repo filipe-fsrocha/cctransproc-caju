@@ -5,7 +5,6 @@ on:
     branches:
       - '**'
     paths-ignore:
-      - 'develop'
       - 'master'
 jobs:
   build:
