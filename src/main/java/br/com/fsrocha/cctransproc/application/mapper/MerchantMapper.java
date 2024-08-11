@@ -2,8 +2,8 @@ package br.com.fsrocha.cctransproc.application.mapper;
 
 import br.com.fsrocha.cctransproc.application.response.DataResponse;
 import br.com.fsrocha.cctransproc.application.response.ListInformation;
-import br.com.fsrocha.cctransproc.application.response.MCCResponse;
-import br.com.fsrocha.cctransproc.domain.mcc.model.entities.MCCEntity;
+import br.com.fsrocha.cctransproc.application.response.MerchantResponse;
+import br.com.fsrocha.cctransproc.domain.company.entities.MerchantEntity;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,17 +17,16 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class MCCMapper {
+public class MerchantMapper {
 
     ModelMapper modelMapper;
 
-    public MCCResponse toResponse(MCCEntity mcc) {
-        return modelMapper.map(mcc, MCCResponse.class);
+    public MerchantResponse toResponse(MerchantEntity entity) {
+        return modelMapper.map(entity, MerchantResponse.class);
     }
 
-    public DataResponse<MCCResponse> toResponseData(Page<MCCEntity> page) {
-        List<MCCResponse> data = Arrays.asList(modelMapper.map(page.getContent(), MCCResponse[].class));
+    public DataResponse<MerchantResponse> toDataResponse(Page<MerchantEntity> page) {
+        List<MerchantResponse> data = Arrays.asList(modelMapper.map(page.getContent(), MerchantResponse[].class));
         return new DataResponse<>(data, modelMapper.map(page, ListInformation.class));
     }
-
 }

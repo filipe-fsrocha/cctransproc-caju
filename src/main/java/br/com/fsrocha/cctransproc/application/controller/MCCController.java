@@ -17,20 +17,20 @@ import org.springframework.web.bind.annotation.*;
 public class MCCController {
 
     MCCService mccService;
-    MCCMapper mccMapper;
+    MCCMapper mapper;
 
     @GetMapping
     public ResponseEntity<DataResponse<MCCResponse>> mcc(@RequestParam(defaultValue = "0") int page,
                                                          @RequestParam(defaultValue = "10") int size,
                                                          @RequestParam(required = false) String search) {
         var mccPage = mccService.listMCCS(page, size, search);
-        return ResponseEntity.ok(mccMapper.toResponseData(mccPage));
+        return ResponseEntity.ok(mapper.toResponseData(mccPage));
     }
 
     @GetMapping("/{mcc}")
     public ResponseEntity<MCCResponse> mcc(@PathVariable int mcc) {
         var mccEntity = mccService.findByMcc(mcc);
-        return ResponseEntity.ok(mccMapper.toResponse(mccEntity));
+        return ResponseEntity.ok(mapper.toResponse(mccEntity));
     }
 
 }
