@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:latest
+    hostname: postgres
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  app:
+    image: cctransproc:develop-SNAPSHOT
+    container_name: cctransproc
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    depends_on:
+      - db

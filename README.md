@@ -45,11 +45,42 @@ O **CCTtransPRoc** é um microserviço especializado no processamento de transa�
 ## Cobertura de testes
 Foi gerado um relatório de testes com o JaCoCo para avaliar a cobertura de código. A cobertura de testes na rotina principal, que é a transação, é de 100%.
 
+## Execução do serviço
+### Variáveis de ambiente
+| Variável de ambiente | Definição                                       | Obrigatório | Default |
+|----------------------|-------------------------------------------------|------------|---------|
+| DB_URL               | Url de conexão com banco de dados               | Não        | jdbc:postgresql://localhost:5432/postgres |
+| DB_USER | Usuário do banco de dados                       | Não        | postgres |
+| DB_PASSWORD | Senha do usuário de conexão do  banco de dados | Não        | postgres |
+
+
+- **Linux**
+  - Ter o `docker` instalado.
+  - Executar o seguinte comando, na pasta root do serviço
+    ```bash
+    sudo chmod +x build.sh
+    sudo ./build.sh
+    ```
+    **Nota:** Aguarde os serviços inciarem para executar os testes.
+- **Windows**
+  - Build
+    ```bash
+    mvn clean install -DskipTests=true
+    ```
+  - Iniciar o banco de dados
+    ```bash
+    docker compose up db -d
+    ```
+  - Executar o aplicativo .jar
+    ```bash
+    mvn spring-boot:run
+    ```
+
 ## API (Documentação)
 A API principal é a `/transaction`, mas desenvolvi algumas APIs adicionais para complementar a transação. Durante a migração do banco de dados, alguns dados são pré-carregados na base.
 
 **Host:** http://localhost:8080
-- **/transaction**
+- **[POST]/transaction**
   - request:
     - payload:
         ```json
@@ -71,7 +102,7 @@ A API principal é a `/transaction`, mas desenvolvi algumas APIs adicionais para
       - `{"code": "07"}`: Se acontecer qualquer outro problema que impeça a transação de ser processada.
 
 
-- **/card/{cardNumber}**
+- **[GET]/card/{cardNumber}**
   - path: 
     - cardNumber: `5513121264313829`
   - response:
@@ -109,7 +140,7 @@ A API principal é a `/transaction`, mas desenvolvi algumas APIs adicionais para
          ```
         
  
-- **/merchant/{id}**
+- **[GET]/merchant/{id}**
   - path:
     - id: `bb24c923-bc0e-4caa-86a4-c33f464371f8`
   - response:
@@ -135,7 +166,7 @@ A API principal é a `/transaction`, mas desenvolvi algumas APIs adicionais para
       }
       ```
       
-- **/mcc/{mcc}**
+- **[GET]/mcc/{mcc}**
   - path:
     - mcc: `5411`
   - response:
