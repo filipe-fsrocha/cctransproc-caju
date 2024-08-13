@@ -1,4 +1,4 @@
-![Build Status](https://github.com/filipe-fsrocha/cctransproc-caju/actions/workflows/ci.yml/badge.svg)
+![Build Status](https://github.com/filipe-fsrocha/cctransproc-caju/actions/workflows/ci.yml/badge.svg?event=push)
 
 ## CCTtransPRoc - Credit Card Transaction Processor
 
