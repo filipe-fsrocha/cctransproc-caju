@@ -23,7 +23,7 @@ public class RegisterTransactionHandler extends TransactionHandler {
     public TransactionCode execute(Transaction transaction) {
         try {
             transactionRepositoryService.save(transaction.toEntity());
-            return new TransactionCode(TransactionStatus.APPROVED.getCode());
+            return nextHandler(transaction);
         } catch (Exception e) {
             LOGGER.error("An error occurred while recording the transaction", e);
             return new TransactionCode(TransactionStatus.UNAUTHORIZED.getCode());
