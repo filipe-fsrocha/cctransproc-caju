@@ -1,6 +1,6 @@
 package br.com.fsrocha.cctransproc.infrastructure.repository;
 
-import br.com.fsrocha.cctransproc.domain.mcc.model.entities.MCCEntity;
+import br.com.fsrocha.cctransproc.domain.mcc.entities.MCCEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

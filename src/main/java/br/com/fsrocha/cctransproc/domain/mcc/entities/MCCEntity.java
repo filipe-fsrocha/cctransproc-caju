@@ -1,12 +1,11 @@
-package br.com.fsrocha.cctransproc.domain.mcc.model.entities;
+package br.com.fsrocha.cctransproc.domain.mcc.entities;
 
-import br.com.fsrocha.cctransproc.domain.company.entities.MerchantEntity;
+import br.com.fsrocha.cctransproc.domain.merchant.entities.MerchantEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -29,6 +28,6 @@ public class MCCEntity {
     @Column(name = "active")
     boolean active;
 
-    @ManyToMany(mappedBy = "mcc", fetch = FetchType.LAZY)
-    List<MerchantEntity> merchant;
+    @OneToOne(mappedBy = "mcc")
+    MerchantEntity merchant;
 }

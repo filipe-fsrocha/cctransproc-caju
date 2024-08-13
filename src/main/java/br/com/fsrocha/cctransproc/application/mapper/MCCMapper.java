@@ -3,7 +3,7 @@ package br.com.fsrocha.cctransproc.application.mapper;
 import br.com.fsrocha.cctransproc.application.response.DataResponse;
 import br.com.fsrocha.cctransproc.application.response.ListInformation;
 import br.com.fsrocha.cctransproc.application.response.MCCResponse;
-import br.com.fsrocha.cctransproc.domain.mcc.model.entities.MCCEntity;
+import br.com.fsrocha.cctransproc.domain.mcc.entities.MCCEntity;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

@@ -3,7 +3,7 @@ package br.com.fsrocha.cctransproc.application.controller;
 import br.com.fsrocha.cctransproc.application.mapper.MerchantMapper;
 import br.com.fsrocha.cctransproc.application.response.DataResponse;
 import br.com.fsrocha.cctransproc.application.response.MerchantResponse;
-import br.com.fsrocha.cctransproc.domain.company.service.MerchantService;
+import br.com.fsrocha.cctransproc.domain.merchant.service.MerchantService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

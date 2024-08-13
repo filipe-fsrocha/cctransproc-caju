@@ -1,7 +1,7 @@
 package br.com.fsrocha.cctransproc.infrastructure.repository.impl;
 
-import br.com.fsrocha.cctransproc.domain.company.entities.MerchantEntity;
-import br.com.fsrocha.cctransproc.domain.company.repository.MerchantRepositoryService;
+import br.com.fsrocha.cctransproc.domain.merchant.entities.MerchantEntity;
+import br.com.fsrocha.cctransproc.domain.merchant.repository.MerchantRepositoryService;
 import br.com.fsrocha.cctransproc.domain.error.ServiceException;
 import br.com.fsrocha.cctransproc.infrastructure.repository.MerchantRepository;
 import br.com.fsrocha.cctransproc.infrastructure.repository.utils.PaginateUtils;
@@ -26,6 +26,11 @@ public class MerchantRepositoryServiceImpl implements MerchantRepositoryService 
     public MerchantEntity finById(UUID id) {
         return merchantRepository.findById(id)
                 .orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND, String.format("Merchant %s not found.", id)));
+    }
+
+    @Override
+    public MerchantEntity findByName(String name) {
+        return merchantRepository.findByName(name);
     }
 
     @Override

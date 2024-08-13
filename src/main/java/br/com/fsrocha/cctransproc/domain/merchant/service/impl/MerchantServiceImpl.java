@@ -1,8 +1,8 @@
-package br.com.fsrocha.cctransproc.domain.company.service.impl;
+package br.com.fsrocha.cctransproc.domain.merchant.service.impl;
 
-import br.com.fsrocha.cctransproc.domain.company.entities.MerchantEntity;
-import br.com.fsrocha.cctransproc.domain.company.repository.MerchantRepositoryService;
-import br.com.fsrocha.cctransproc.domain.company.service.MerchantService;
+import br.com.fsrocha.cctransproc.domain.merchant.entities.MerchantEntity;
+import br.com.fsrocha.cctransproc.domain.merchant.repository.MerchantRepositoryService;
+import br.com.fsrocha.cctransproc.domain.merchant.service.MerchantService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -21,6 +21,11 @@ public class MerchantServiceImpl implements MerchantService {
     @Override
     public MerchantEntity findById(UUID id) {
         return merchantRepositoryService.finById(id);
+    }
+
+    @Override
+    public MerchantEntity findByName(String name) {
+        return merchantRepositoryService.findByName(name);
     }
 
     @Override

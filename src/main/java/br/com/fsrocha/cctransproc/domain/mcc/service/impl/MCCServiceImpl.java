@@ -1,6 +1,6 @@
 package br.com.fsrocha.cctransproc.domain.mcc.service.impl;
 
-import br.com.fsrocha.cctransproc.domain.mcc.model.entities.MCCEntity;
+import br.com.fsrocha.cctransproc.domain.mcc.entities.MCCEntity;
 import br.com.fsrocha.cctransproc.domain.mcc.repository.MCCRepositoryService;
 import br.com.fsrocha.cctransproc.domain.mcc.service.MCCService;
 import lombok.AccessLevel;

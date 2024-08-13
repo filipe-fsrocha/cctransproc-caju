@@ -44,7 +44,7 @@ class MCCControllerTest extends DatabaseTest {
                         createMCC(5412, "LOJAS DE ALIMENTOS"),
                         createMCC(5811, "DISTRIBUIÇÃO E PRODUÇÃO DE ALIMENTOS"),
                         createMCC(5812, "RESTAURANTES"),
-                        createMCC(5732, "LOJA DE ELETRÔNICOS")
+                        createMCC(4000, "SERVIÇOS DE TRANSPORTE")
                 ));
         Assertions.assertThat(result.getListInformation())
                 .isEqualTo(toListInformation(5, 1));
@@ -90,7 +90,7 @@ class MCCControllerTest extends DatabaseTest {
                         createMCC(5412, "LOJAS DE ALIMENTOS"),
                         createMCC(5811, "DISTRIBUIÇÃO E PRODUÇÃO DE ALIMENTOS"),
                         createMCC(5812, "RESTAURANTES"),
-                        createMCC(5732, "LOJA DE ELETRÔNICOS")
+                        createMCC(4000, "SERVIÇOS DE TRANSPORTE")
                 ));
         Assertions.assertThat(result.getListInformation())
                 .isEqualTo(toListInformation(5, 1));

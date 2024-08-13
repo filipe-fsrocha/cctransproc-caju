@@ -1,6 +1,6 @@
 package br.com.fsrocha.cctransproc.domain.mcc.repository;
 
-import br.com.fsrocha.cctransproc.domain.mcc.model.entities.MCCEntity;
+import br.com.fsrocha.cctransproc.domain.mcc.entities.MCCEntity;
 import org.springframework.data.domain.Page;
 
 public interface MCCRepositoryService {

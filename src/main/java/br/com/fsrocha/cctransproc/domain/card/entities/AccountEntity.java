@@ -1,10 +1,13 @@
 package br.com.fsrocha.cctransproc.domain.card.entities;
 
 import br.com.fsrocha.cctransproc.domain.card.AccountType;
+import br.com.fsrocha.cctransproc.domain.transaction.model.entities.TransactionEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -27,5 +30,9 @@ public class AccountEntity {
 
     @Column(name = "total_amount")
     BigDecimal totalAmount;
+
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, orphanRemoval = true)
+    @ToString.Exclude
+    List<TransactionEntity> transactions;
 
 }

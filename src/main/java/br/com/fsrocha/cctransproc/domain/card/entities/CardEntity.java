@@ -2,8 +2,8 @@ package br.com.fsrocha.cctransproc.domain.card.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,14 +21,15 @@ public class CardEntity {
     String cardNumber;
 
     @Column(name = "expiration_date")
-    LocalDate expirationDte;
+    String expirationDate;
 
     @Column(name = "ccv")
-    int ccv;
+    String cvc;
 
     @Column(name = "password")
     String password;
 
-    @OneToMany(mappedBy = "card", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "card", fetch = FetchType.LAZY, orphanRemoval = true)
+    @ToString.Exclude
     List<AccountEntity> accounts;
 }

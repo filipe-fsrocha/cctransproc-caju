@@ -1,7 +1,7 @@
 package br.com.fsrocha.cctransproc.infrastructure.repository.impl;
 
 import br.com.fsrocha.cctransproc.domain.error.ServiceException;
-import br.com.fsrocha.cctransproc.domain.mcc.model.entities.MCCEntity;
+import br.com.fsrocha.cctransproc.domain.mcc.entities.MCCEntity;
 import br.com.fsrocha.cctransproc.domain.mcc.repository.MCCRepositoryService;
 import br.com.fsrocha.cctransproc.infrastructure.repository.MCCRepository;
 import br.com.fsrocha.cctransproc.infrastructure.repository.utils.PaginateUtils;
