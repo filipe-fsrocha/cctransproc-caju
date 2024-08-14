@@ -26,10 +26,12 @@ O **CCTtransPRoc** é um microserviço especializado no processamento de transa�
 - É crucial que os dados sensíveis sejam criptografados, mas por se tratar de um testes, regras de criptografia não foram aplicadas.
 - O histórico de transações foi mantido apenas para as transações bem-sucedidas; no entanto, é interessante registrar as tentativas rejeitadas sem debitar o saldo das contas.
 - Para validar a transação, foi utilizado o padrão **Chain of Responsibility**, onde as validações são separadas em uma cadeia de processo, cada uma realizando apenas o que lhe é designado.
-- Para resolver o problema de concorrência, podemos adotar duas abordagens:
-  - Podemos realizar uma abordagem de lock diretamente no banco de dados.
-  - Podemos utilizar o `Redis` para fazer o `lock` de forma centralizada, sem sobrecarregar o banco de dados.
-
+- **L4 Questão aberta:** 
+  - Para resolver o problema de concorrência, podemos adotar duas abordagens:
+    - Podemos realizar uma abordagem de lock diretamente no banco de dados.
+    - Podemos utilizar o `Redis` para fazer o `lock` de forma centralizada, sem sobrecarregar o banco de dados.
+    
+      ![Diagrama](diagrama.png)
 > **Nota:** Embora o teste seja relativamente simples, projetei a estrutura de forma a garantir que ela possa ser escalada conforme o crescimento, mantendo a separação das responsabilidades por domínio. 
 
 ## Dependências
@@ -78,6 +80,38 @@ Foi gerado um relatório de testes com o JaCoCo para avaliar a cobertura de cód
     
 ### Carga inicial
 A aplicação já terá alguns dados pré-carregados para facilitar os testes. Utilize as APIs para visualizar os dados.
+
+- Dados do cartão (Senha: `1234`)
+
+  | id  | card_number         | expiration_date | cvc | passwrod |
+  |-----|---------------------|-----------------|-----|----------|
+  | ... | 5513 1212 6431 3829 | 2024-08     | 610 | MTIzNA== |
+
+- Dados da conta
+
+  | id | card_id | account_type | total_amount |
+  |----|---------|--------------|--------------|
+  | ... | ... | MEAL         | 100          |
+  | ... | ... | FOOD         | 100          |
+  | ... | ... | CASH         | 200          |
+
+- MCC's
+
+  | id | mcc  | description | active |
+  |----|------|------------|--------|
+  | ... | 5411 | MERCEARIAS/SUPERMERCADOS (GROCERY STORES/SUPERM.) | true |
+  | ... | 5412 | LOJAS DE ALIMENTOS | true |
+  | ... | 5811 | DISTRIBUIÇÃO E PRODUÇÃO DE ALIMENTOS | true |
+  | ... | 5812 | RESTAURANTES | true |
+  | ... | 4000 | SERVIÇOS DE TRANSPORTE | true |
+
+- Merchants
+
+   | id | name | created_at | mcc_id |
+   |----|------|------------|--------|
+   | ... | UBER EATS                  SAO PAULO BR | ...        | ... |
+   | ... | PAG*JoseDaSilva         RIO DE JANEI BR | ...        | ... |
+   | ... | UBER TRIP                  SAO PAULO BR | ...        | ... |
 
 ## API (Documentação)
 A API principal é a `/transaction`, mas desenvolvi algumas APIs adicionais para complementar a transação. Durante a migração do banco de dados, alguns dados são pré-carregados na base.
