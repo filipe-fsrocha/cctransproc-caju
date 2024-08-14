@@ -20,7 +20,7 @@ public class MCCEntity {
     UUID id;
 
     @Column(name = "mcc", nullable = false)
-    int mcc;
+    String mcc;
 
     @Column(name = "description", nullable = false)
     String description;

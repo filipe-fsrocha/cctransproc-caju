@@ -40,11 +40,11 @@ class MCCControllerTest extends DatabaseTest {
                 .ignoringFields("id")
                 .ignoringCollectionOrder()
                 .isEqualTo(List.of(
-                        createMCC(5411, "MERCEARIAS/SUPERMERCADOS (GROCERY STORES/SUPERM.)"),
-                        createMCC(5412, "LOJAS DE ALIMENTOS"),
-                        createMCC(5811, "DISTRIBUIÇÃO E PRODUÇÃO DE ALIMENTOS"),
-                        createMCC(5812, "RESTAURANTES"),
-                        createMCC(4000, "SERVIÇOS DE TRANSPORTE")
+                        createMCC("5411", "MERCEARIAS/SUPERMERCADOS (GROCERY STORES/SUPERM.)"),
+                        createMCC("5412", "LOJAS DE ALIMENTOS"),
+                        createMCC("5811", "DISTRIBUIÇÃO E PRODUÇÃO DE ALIMENTOS"),
+                        createMCC("5812", "RESTAURANTES"),
+                        createMCC("4000", "SERVIÇOS DE TRANSPORTE")
                 ));
         Assertions.assertThat(result.getListInformation())
                 .isEqualTo(toListInformation(5, 1));
@@ -65,7 +65,7 @@ class MCCControllerTest extends DatabaseTest {
                 .ignoringFields("id")
                 .ignoringCollectionOrder()
                 .isEqualTo(List.of(
-                        createMCC(5411, "MERCEARIAS/SUPERMERCADOS (GROCERY STORES/SUPERM.)")
+                        createMCC("5411", "MERCEARIAS/SUPERMERCADOS (GROCERY STORES/SUPERM.)")
                 ));
         Assertions.assertThat(result.getListInformation())
                 .isEqualTo(toListInformation(5, 5));
@@ -86,11 +86,11 @@ class MCCControllerTest extends DatabaseTest {
                 .ignoringFields("id")
                 .ignoringCollectionOrder()
                 .isEqualTo(List.of(
-                        createMCC(5411, "MERCEARIAS/SUPERMERCADOS (GROCERY STORES/SUPERM.)"),
-                        createMCC(5412, "LOJAS DE ALIMENTOS"),
-                        createMCC(5811, "DISTRIBUIÇÃO E PRODUÇÃO DE ALIMENTOS"),
-                        createMCC(5812, "RESTAURANTES"),
-                        createMCC(4000, "SERVIÇOS DE TRANSPORTE")
+                        createMCC("5411", "MERCEARIAS/SUPERMERCADOS (GROCERY STORES/SUPERM.)"),
+                        createMCC("5412", "LOJAS DE ALIMENTOS"),
+                        createMCC("5811", "DISTRIBUIÇÃO E PRODUÇÃO DE ALIMENTOS"),
+                        createMCC("5812", "RESTAURANTES"),
+                        createMCC("4000", "SERVIÇOS DE TRANSPORTE")
                 ));
         Assertions.assertThat(result.getListInformation())
                 .isEqualTo(toListInformation(5, 1));
@@ -112,8 +112,8 @@ class MCCControllerTest extends DatabaseTest {
                 .ignoringFields("id")
                 .ignoringCollectionOrder()
                 .isEqualTo(List.of(
-                        createMCC(5412, "LOJAS DE ALIMENTOS"),
-                        createMCC(5811, "DISTRIBUIÇÃO E PRODUÇÃO DE ALIMENTOS")
+                        createMCC("5412", "LOJAS DE ALIMENTOS"),
+                        createMCC("5811", "DISTRIBUIÇÃO E PRODUÇÃO DE ALIMENTOS")
                 ));
         Assertions.assertThat(result.getListInformation())
                 .isEqualTo(toListInformation(2, 1));
@@ -123,13 +123,13 @@ class MCCControllerTest extends DatabaseTest {
     @DisplayName("Deve retornar os detalhes do MCC, com base o MCC informado")
     void testReturnMCCDetailsByMCCInformed() {
         // Act
-        ResponseEntity<MCCResponse> data = controller.mcc(5412);
+        ResponseEntity<MCCResponse> data = controller.mcc("5412");
 
         // Assert
         Assertions.assertThat(data.getBody())
                 .usingRecursiveComparison()
                 .ignoringFields("id")
-                .isEqualTo(createMCC(5412, "LOJAS DE ALIMENTOS"));
+                .isEqualTo(createMCC("5412", "LOJAS DE ALIMENTOS"));
     }
 
     @Test
@@ -137,7 +137,7 @@ class MCCControllerTest extends DatabaseTest {
     void testReturnNotFound() {
         // Act
         ServiceException exception = ServiceExceptionAssertions.catchThrowableServiceException(
-                () -> controller.mcc(5420)
+                () -> controller.mcc("5420")
         );
 
         // Assert
@@ -146,7 +146,7 @@ class MCCControllerTest extends DatabaseTest {
                 .hasMessage("MCC 5420 not found.");
     }
 
-    private MCCResponse createMCC(int mcc, String description) {
+    private MCCResponse createMCC(String mcc, String description) {
         var mccResponse = new MCCResponse();
         mccResponse.setMcc(mcc);
         mccResponse.setDescription(description);

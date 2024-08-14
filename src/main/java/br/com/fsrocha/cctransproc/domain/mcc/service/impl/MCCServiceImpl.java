@@ -17,7 +17,7 @@ public class MCCServiceImpl implements MCCService {
     MCCRepositoryService mccRepositoryService;
 
     @Override
-    public MCCEntity findByMcc(int mcc) {
+    public MCCEntity findByMcc(String mcc) {
         return mccRepositoryService.findByMcc(mcc);
     }
 

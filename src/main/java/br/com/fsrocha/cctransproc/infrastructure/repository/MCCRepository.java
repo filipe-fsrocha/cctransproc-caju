@@ -15,6 +15,6 @@ public interface MCCRepository extends JpaRepository<MCCEntity, UUID> {
     @Query("select m from MCCEntity m where :search is null or lower(m.description) like :search")
     Page<MCCEntity> listMCCS(@Param("search") String search, Pageable pageable);
 
-    Optional<MCCEntity> findByMcc(int mcc);
+    Optional<MCCEntity> findByMcc(String mcc);
 
 }

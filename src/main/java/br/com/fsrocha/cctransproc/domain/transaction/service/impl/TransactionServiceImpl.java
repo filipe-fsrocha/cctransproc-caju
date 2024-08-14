@@ -4,7 +4,7 @@ import br.com.fsrocha.cctransproc.domain.transaction.model.valueobject.Transacti
 import br.com.fsrocha.cctransproc.domain.transaction.model.valueobject.TransactionCode;
 import br.com.fsrocha.cctransproc.domain.transaction.service.TransactionService;
 import br.com.fsrocha.cctransproc.domain.transaction.validation.CheckBalanceHandler;
-import br.com.fsrocha.cctransproc.domain.transaction.validation.CheckMCCHandler;
+import br.com.fsrocha.cctransproc.domain.transaction.validation.CheckMCCAndMerchantHandler;
 import br.com.fsrocha.cctransproc.domain.transaction.validation.RegisterTransactionHandler;
 import br.com.fsrocha.cctransproc.domain.transaction.validation.ValidateCardHandler;
 import lombok.AccessLevel;
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TransactionServiceImpl implements TransactionService {
 
     ValidateCardHandler validateCard;
-    CheckMCCHandler checkMCC;
+    CheckMCCAndMerchantHandler checkMCC;
     CheckBalanceHandler checkBalance;
     RegisterTransactionHandler registerTransaction;
 

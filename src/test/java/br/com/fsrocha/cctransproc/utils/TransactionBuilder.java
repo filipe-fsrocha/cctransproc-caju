@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @Data
 @Builder
 public class TransactionBuilder {
-    int mcc;
+    String mcc;
     BigDecimal totalAmount;
     String merchant;
     String passwordOrCvc;

@@ -28,7 +28,7 @@ public class MCCController {
     }
 
     @GetMapping("/{mcc}")
-    public ResponseEntity<MCCResponse> mcc(@PathVariable int mcc) {
+    public ResponseEntity<MCCResponse> mcc(@PathVariable String mcc) {
         var mccEntity = mccService.findByMcc(mcc);
         return ResponseEntity.ok(mapper.toResponse(mccEntity));
     }

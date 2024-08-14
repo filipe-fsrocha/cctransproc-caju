@@ -21,7 +21,7 @@ public class MCCRepositoryServiceImpl implements MCCRepositoryService {
     MCCRepository mccRepository;
 
     @Override
-    public MCCEntity findByMcc(int mcc) {
+    public MCCEntity findByMcc(String mcc) {
         return mccRepository.findByMcc(mcc)
                 .orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND, String.format("MCC %s not found.", mcc)));
     }

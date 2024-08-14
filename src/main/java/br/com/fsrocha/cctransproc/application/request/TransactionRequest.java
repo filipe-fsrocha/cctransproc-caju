@@ -24,8 +24,8 @@ public class TransactionRequest {
     @NotNull(message = "type is required")
     TransactionType type;
 
-    @NotNull(message = "mcc is required")
-    int mcc;
+    @NotBlank(message = "mcc is required")
+    String mcc;
 
     @NotBlank(message = "merchant is required")
     String merchant;

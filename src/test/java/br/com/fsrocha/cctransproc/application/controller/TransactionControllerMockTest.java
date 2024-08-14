@@ -5,6 +5,7 @@ import br.com.fsrocha.cctransproc.application.request.record.Account;
 import br.com.fsrocha.cctransproc.domain.card.AccountType;
 import br.com.fsrocha.cctransproc.domain.card.entities.AccountEntity;
 import br.com.fsrocha.cctransproc.domain.card.repository.AccountRepositoryService;
+import br.com.fsrocha.cctransproc.domain.merchant.repository.MerchantRepositoryService;
 import br.com.fsrocha.cctransproc.domain.transaction.TransactionType;
 import br.com.fsrocha.cctransproc.domain.transaction.model.entities.TransactionEntity;
 import br.com.fsrocha.cctransproc.domain.transaction.model.valueobject.TransactionCode;
@@ -25,6 +26,7 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 class TransactionControllerMockTest extends DatabaseTest {
@@ -36,6 +38,9 @@ class TransactionControllerMockTest extends DatabaseTest {
 
     @MockBean
     TransactionRepositoryService transactionRepositoryService;
+
+    @MockBean
+    MerchantRepositoryService merchantRepositoryService;
 
     @Autowired
     TransactionController controller;
@@ -84,10 +89,35 @@ class TransactionControllerMockTest extends DatabaseTest {
         Mockito.verify(transactionRepositoryService).save(any(TransactionEntity.class));
     }
 
+    @Test
+    @DisplayName("Transação não autorizada devido falha a recuperar os dados do merchant")
+    void testTransactionRejectWithMerchantNotFound() {
+        // Assemble
+        var account = new AccountEntity();
+        account.setTotalAmount(BigDecimal.valueOf(10.0));
+        account.setAccountType(AccountType.FOOD);
+
+        var request = createDefaultTransactionRequest(BigDecimal.valueOf(10.0));
+        request.setMcc("541ae");
+
+        Mockito.when(merchantRepositoryService.findByName(anyString())).thenThrow(new RuntimeException("Not found"));
+
+        // Act
+        ResponseEntity<TransactionCode> response = controller.transaction(request);
+
+        // Assert
+        var result = response.getBody();
+
+        assertNotNull(result);
+        assertEquals("07", result.getCode());
+
+        Mockito.verify(merchantRepositoryService).findByName(anyString());
+    }
+
     private TransactionRequest createDefaultTransactionRequest(BigDecimal amount) {
         var transaction = TransactionBuilder.builder()
                 .totalAmount(amount)
-                .mcc(5411)
+                .mcc("5411")
                 .merchant(UBER_EATS)
                 .passwordOrCvc("1234")
                 .build();

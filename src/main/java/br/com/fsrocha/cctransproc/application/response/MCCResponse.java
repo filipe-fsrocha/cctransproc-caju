@@ -8,7 +8,7 @@ import java.util.UUID;
 public class MCCResponse {
 
     UUID id;
-    int mcc;
+    String mcc;
     String description;
     boolean active;
 

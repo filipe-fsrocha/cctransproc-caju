@@ -126,7 +126,7 @@ class TransactionControllerTest extends DatabaseTest {
         // Assemble
         var transaction = TransactionBuilder.builder()
                 .totalAmount(BigDecimal.valueOf(10.0))
-                .mcc(5411)
+                .mcc("5411")
                 .merchant(UBER_EATS)
                 .passwordOrCvc("123")
                 .build();
@@ -158,7 +158,7 @@ class TransactionControllerTest extends DatabaseTest {
         // Assemble
         var transaction = TransactionBuilder.builder()
                 .totalAmount(BigDecimal.valueOf(10.0))
-                .mcc(5811)
+                .mcc("5811")
                 .passwordOrCvc("610")
                 .merchant(PAG_JOSE_DA_SILVA)
                 .build();
@@ -191,7 +191,7 @@ class TransactionControllerTest extends DatabaseTest {
         // Assemble
         var transaction = TransactionBuilder.builder()
                 .totalAmount(BigDecimal.valueOf(10.0))
-                .mcc(0)
+                .mcc("541a")
                 .passwordOrCvc("1234")
                 .merchant(PAG_JOSE_DA_SILVA)
                 .build();
@@ -224,7 +224,7 @@ class TransactionControllerTest extends DatabaseTest {
         // Assemble
         var transaction = TransactionBuilder.builder()
                 .totalAmount(BigDecimal.valueOf(15.80))
-                .mcc(4000)
+                .mcc("4000")
                 .passwordOrCvc("1234")
                 .merchant("UBER TRIP                  SAO PAULO BR")
                 .build();
@@ -251,10 +251,44 @@ class TransactionControllerTest extends DatabaseTest {
         assertEquals(0, expectedTransactional.get().getAmount().compareTo(BigDecimal.valueOf(15.80)));
     }
 
+    @Test
+    @DisplayName("[MCC-51af] - Verificar se o sistema retorna 'code: 00' para uma transação com mcc inválido, onde deve ser considrado o mcc do merchant")
+    void transactionApprovedWithInvalidMccDoingByPassMerchant() {
+        // Assemble
+        var transaction = TransactionBuilder.builder()
+                .totalAmount(BigDecimal.valueOf(15.80))
+                .mcc("51af")
+                .passwordOrCvc("1234")
+                .merchant("UBER TRIP                  SAO PAULO BR")
+                .build();
+
+        var request = buildTransactionRequest(transaction, TransactionType.POS);
+
+        // Act
+        ResponseEntity<TransactionCode> response = controller.transaction(request);
+
+        // Assert
+        var result = response.getBody();
+        var expectedAccountFood = accountRepository.findAccount(CARD_NUMBER, AccountType.FOOD);
+        var expectedAccountMeal = accountRepository.findAccount(CARD_NUMBER, AccountType.MEAL);
+        var expectedAccountCash = accountRepository.findAccount(CARD_NUMBER, AccountType.CASH);
+        var expectedTransactional = transactionRepository.findAll()
+                .stream().findFirst();
+
+        assertNotNull(result);
+        assertEquals(AUTHORIZED_CODE, result.getCode());
+        assertEquals(0, expectedAccountFood.getTotalAmount().compareTo(BALANCE_FOOD));
+        assertEquals(0, expectedAccountMeal.getTotalAmount().compareTo(BALANCE_MEAL));
+        assertEquals(0, expectedAccountCash.getTotalAmount().compareTo(BigDecimal.valueOf(184.20)));
+        assertTrue(expectedTransactional.isPresent());
+        assertEquals(0, expectedTransactional.get().getAmount().compareTo(BigDecimal.valueOf(15.80)));
+
+    }
+
     private TransactionRequest createDefaultTransactionRequest(BigDecimal amount) {
         var transaction = TransactionBuilder.builder()
                 .totalAmount(amount)
-                .mcc(5411)
+                .mcc("5411")
                 .merchant(UBER_EATS)
                 .passwordOrCvc("1234")
                 .build();

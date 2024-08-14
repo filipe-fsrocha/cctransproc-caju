@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 
 public interface MCCService {
 
-    MCCEntity findByMcc(int mcc);
+    MCCEntity findByMcc(String mcc);
 
     Page<MCCEntity> listMCCS(int page, int size, String search);
 

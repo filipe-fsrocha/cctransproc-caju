@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface MerchantRepository extends JpaRepository<MerchantEntity, UUID> {
@@ -14,6 +15,6 @@ public interface MerchantRepository extends JpaRepository<MerchantEntity, UUID> 
     @Query("select m from MerchantEntity m where :search is null or lower(m.name) like :search")
     Page<MerchantEntity> listMerchant(@Param("search") String search, Pageable pageable);
 
-    MerchantEntity findByName(String name);
+    Optional<MerchantEntity> findByName(String name);
 
 }

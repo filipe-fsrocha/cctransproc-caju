@@ -75,6 +75,9 @@ Foi gerado um relatório de testes com o JaCoCo para avaliar a cobertura de cód
     ```bash
     mvn spring-boot:run
     ```
+    
+### Carga inicial
+A aplicação já terá alguns dados pré-carregados para facilitar os testes. Utilize as APIs para visualizar os dados.
 
 ## API (Documentação)
 A API principal é a `/transaction`, mas desenvolvi algumas APIs adicionais para complementar a transação. Durante a migração do banco de dados, alguns dados são pré-carregados na base.
@@ -90,7 +93,7 @@ A API principal é a `/transaction`, mas desenvolvi algumas APIs adicionais para
               "password": "1234"
            },
            "totalAmount": 10.0,
-           "mcc": 5411,
+           "mcc": "5411",
            "type": "POS",
            "merchant": "UBER EATS                  SAO PAULO BR"
         }
@@ -152,7 +155,7 @@ A API principal é a `/transaction`, mas desenvolvi algumas APIs adicionais para
         "createdAt": "2024-08-13T00:05:51.081328",
         "mcc": {
             "id": "c19151fa-560d-4c72-a1f2-288156a160e1",
-            "mcc": 5812,
+            "mcc": "5812",
             "description": "RESTAURANTES",
             "active": true
         }
@@ -174,7 +177,7 @@ A API principal é a `/transaction`, mas desenvolvi algumas APIs adicionais para
        ```json
       {
         "id": "f5ddc13b-3fc6-40ca-909e-354d33089a29",
-        "mcc": 5411,
+        "mcc": "5411",
         "description": "MERCEARIAS/SUPERMERCADOS (GROCERY STORES/SUPERM.)",
         "active": true
       }

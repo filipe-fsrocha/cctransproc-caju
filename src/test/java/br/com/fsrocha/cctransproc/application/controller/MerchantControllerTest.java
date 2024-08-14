@@ -43,11 +43,11 @@ class MerchantControllerTest extends DatabaseTest {
                 .ignoringCollectionOrder()
                 .isEqualTo(List.of(
                         createMerchant(PAG_JOSE_DA_SILVA,
-                                createMcc("f5ddc13b-3fc6-40ca-909e-354d33089a29", 5411, "MERCEARIAS/SUPERMERCADOS (GROCERY STORES/SUPERM.)")),
+                                createMcc("f5ddc13b-3fc6-40ca-909e-354d33089a29", "5411", "MERCEARIAS/SUPERMERCADOS (GROCERY STORES/SUPERM.)")),
                         createMerchant(UBER_EATS,
-                                createMcc("c19151fa-560d-4c72-a1f2-288156a160e1", 5812, "RESTAURANTES")),
+                                createMcc("c19151fa-560d-4c72-a1f2-288156a160e1", "5812", "RESTAURANTES")),
                         createMerchant(UBER_TRIP,
-                                createMcc("c19151fa-560d-4c72-a1f2-288156a160e2", 4000, "SERVIÇOS DE TRANSPORTE"))
+                                createMcc("c19151fa-560d-4c72-a1f2-288156a160e2", "4000", "SERVIÇOS DE TRANSPORTE"))
                 ));
     }
 
@@ -65,7 +65,7 @@ class MerchantControllerTest extends DatabaseTest {
                 .usingRecursiveComparison()
                 .ignoringFields("id", "createdAt")
                 .isEqualTo(createMerchant(UBER_EATS,
-                        createMcc("c19151fa-560d-4c72-a1f2-288156a160e1", 5812, "RESTAURANTES")));
+                        createMcc("c19151fa-560d-4c72-a1f2-288156a160e1", "5812", "RESTAURANTES")));
     }
 
 
@@ -76,7 +76,7 @@ class MerchantControllerTest extends DatabaseTest {
         return merchant;
     }
 
-    private MCCResponse createMcc(String id, int mcc, String description) {
+    private MCCResponse createMcc(String id, String mcc, String description) {
         var mccResponse = new MCCResponse();
         mccResponse.setId(UUID.fromString(id));
         mccResponse.setMcc(mcc);
