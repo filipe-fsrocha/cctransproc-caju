@@ -81,6 +81,9 @@ Foi gerado um relatório de testes com o JaCoCo para avaliar a cobertura de cód
 ### Carga inicial
 A aplicação já terá alguns dados pré-carregados para facilitar os testes. Utilize as APIs para visualizar os dados.
 
+#### Modelagem do banco de dados
+![db-model](db-model.png)
+
 - Dados do cartão (Senha: `1234`)
 
   | id  | card_number         | expiration_date | cvc | passwrod |
